@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>风语聊天室 · leaves-gzs/windtalking</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9eef3 100%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        header {
+            background: #1a1e2b;
+            color: white;
+            padding: 1.8rem 2rem;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        header h1::before {
+            content: "🌬️";
+            font-size: 2rem;
+        }
+        .sub {
+            margin-top: 0.5rem;
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+        .chat-area {
+            padding: 2rem;
+        }
+        .giscus {
+            margin-top: 0.5rem;
+        }
+        .notice {
+            background: #e8f0fe;
+            border-left: 4px solid #3b82f6;
+            padding: 0.8rem 1.2rem;
+            margin-top: 1.8rem;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+            line-height: 1.5;
+        }
+        .notice code {
+            background: #dbeafe;
+            padding: 0.2rem 0.4rem;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+        footer {
+            text-align: center;
+            padding: 1.2rem;
+            font-size: 0.75rem;
+            color: #5b6e8c;
+            border-top: 1px solid #e9edf2;
+            background: #fafcff;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 600px) {
+            .container { border-radius: 20px; }
+            .chat-area { padding: 1.2rem; }
+            header { padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>windtalking · 风语</h1>
+        <div class="sub">用 GitHub 账号登录，留下你的「风语」</div>
+    </header>
+
+    <div class="chat-area">
+        <!-- Giscus 聊天/评论组件 -->
+        <div class="giscus">
+            <script src="https://giscus.app/client.js"
+                    data-repo="leaves-gzs/windtalking"
+                    data-repo-id="R_kgDOSkxSNg"
+                    data-category="Announcements"
+                    data-category-id="DIC_kwDOSkxSNs4C9mdp"
+                    data-mapping="pathname"
+                    data-strict="0"
+                    data-reactions-enabled="1"
+                    data-emit-metadata="0"
+                    data-input-position="bottom"
+                    data-theme="preferred_color_scheme"
+                    data-lang="zh-CN"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </div>
+
+        <div class="notice">
+            ✅ <strong>配置完成</strong><br>
+            • 仓库 <code>leaves-gzs/windtalking</code> 已安装 Giscus App。<br>
+            • 分类 <code>Announcements</code> 已正确关联。<br>
+            • 所有评论/聊天内容将自动同步到 GitHub Discussions 中，永久保存。
+        </div>
+    </div>
+
+    <footer>
+        🍃 开源 · 自由 · 用 GitHub 账号登录即可参与聊天
+    </footer>
+</div>
+</body>
+</html>
