@@ -57,31 +57,52 @@ io.on('connection', (socket) => {
 
     // 攻击（空壳，等待你填逻辑）
     socket.on('attack', () => {
+      const attacker = players[socket.id];
+      if (!attacker) return;
+      const defenderId = playerIds.find(id => id !== socket.id);
+      if (!defenderId) return;
+      const defender = players[defenderId];
       function inMeleeRange(ax, ay, bx, by) {
         const dx = ax - bx;
         const dy = ay - by;
         const dist = Math.sqrt(dx*dx + dy*dy);
         return dist < 30;   // 两个圆接触就算近战命中
       }
-      bool ranged_attack(int atk_x, int atk_y, int last_dir, int def_x, int def_y) {
-        for (int i = 1; i <= BOW_RANGE; i++) {
-            int check_x = atk_x, check_y = atk_y;
-            switch (last_dir) {
-                case 0: check_y -= i; break;
-                case 1: check_y += i; break;
-                case 2: check_x -= i; break;
-                case 3: check_x += i; break;
+      function rangedAttack(attacker, defender, rangePx) {
+            // attacker: { x, y, lastDir }
+            // defender: { x, y }
+            // rangePx: 弓箭射程（像素），比如 200
+        
+            const startX = attacker.x;
+            const startY = attacker.y;
+            let endX = startX;
+            let endY = startY;
+        
+            // 根据方向计算射线的终点
+            switch (attacker.lastDir) {
+                case 0: endY = startY - rangePx; break;  // 上
+                case 1: endY = startY + rangePx; break;  // 下
+                case 2: endX = startX - rangePx; break;  // 左
+                case 3: endX = startX + rangePx; break;  // 右
+                default: return false;
             }
-            if (边界或墙壁) break;
-            if (check_x == def_x && check_y == def_y) return true;
-        }
-        return false;
+        
+            // 计算线段 (startX,startY) -> (endX,endY) 上离 defender 圆心最近的点
+            const dx = endX - startX;
+            const dy = endY - startY;
+            if (dx === 0 && dy === 0) return false; // 射线长度为0
+        
+            // 参数 t 表示线段上的比例 (0~1)
+            const t = ((defender.x - startX) * dx + (defender.y - startY) * dy) / (dx * dx + dy * dy);
+            const clampedT = Math.max(0, Math.min(1, t));
+            const closestX = startX + clampedT * dx;
+            const closestY = startY + clampedT * dy;
+        
+            // 最近点与 defender 圆心的距离（防御者半径 15）
+            const distToDefender = Math.hypot(closestX - defender.x, closestY - defender.y);
+            return distToDefender < 15;
       }
-      const attacker = players[socket.id];
-      if (!attacker) return;
-      const defenderId = playerIds.find(id => id !== socket.id);
-      if (!defenderId) return;
-      const defender = players[defenderId];
+      
   
       let hit = false;
       // 近战距离阈值（两个圆半径之和）
@@ -111,8 +132,14 @@ io.on('connection', (socket) => {
     });
 
     socket.on('heal', () => {
-
-      
+        if (!players[socket.id]) return;
+        const player = players[socket.id];
+        if(player.packs > 0) {//无使用血量限制
+            player.hp = player.hp + 30;
+            if(player.hp > 250) player.hp = 250;
+            player.packs = player.packs - 1;
+        }
+        broadcastPlayers();
     });
     socket.on('switchWeapon', () => {
         if (!players[socket.id]) return;
