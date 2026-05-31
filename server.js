@@ -169,5 +169,7 @@ function broadcastPlayers() {
 }
 
 const PORT = process.env.PORT || 8080;
-server.listen(PORT, () => console.log(`服务器运行在端口 ${PORT}`));
-console.log('环境变量 PORT =', process.env.PORT);
+server.listen(PORT, '0.0.0.0', () => {
+    console.log(`服务器运行在端口 ${PORT}`);
+    console.log('环境变量 PORT =', process.env.PORT);
+});
