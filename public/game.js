@@ -1,4 +1,4 @@
-const socket = io();  // 如果前后端分开部署，改成 io('https://你的后端地址')
+const socket = io('https://windtalking.up.railway.app');
 let myNumber = null;  // 'A' 或 'B'
 let gameState = { A: null, B: null };
 const canvas = document.getElementById('gameCanvas');
