@@ -1,4 +1,4 @@
-const socket = io('https://windtalking.up.railway.app');
+const socket = io('windtalking-production.up.railway.app');
 let myNumber = null;  // 'A' 或 'B'
 let gameState = { A: null, B: null };
 const canvas = document.getElementById('gameCanvas');
