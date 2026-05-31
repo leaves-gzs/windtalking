@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>联机格斗 · 自己填逻辑</title>
+    <style>
+        canvas { border: 2px solid black; background: #eee; display: block; margin: 20px auto; }
+        #info { text-align: center; font-family: monospace; }
+        .controls { text-align: center; margin-top: 10px; color: #333; }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="600" height="600"></canvas>
+    <div id="info">
+        <span id="playerLabel">等待分配玩家...</span><br>
+        <span id="hpA">A血量:</span> | <span id="hpB">B血量:</span>
+    </div>
+    <div class="controls">
+        WASD 移动 | 空格攻击 | E 回血 | R 换武器
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
