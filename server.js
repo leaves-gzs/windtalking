@@ -66,7 +66,7 @@ io.on('connection', (socket) => {
         const dx = ax - bx;
         const dy = ay - by;
         const dist = Math.sqrt(dx*dx + dy*dy);
-        return dist < 30;   // 两个圆接触就算近战命中
+        return dist < 60;   // 两个圆接触就算近战命中
       }
       function rangedAttack(attacker, defender, rangePx) {
             // attacker: { x, y, lastDir }
