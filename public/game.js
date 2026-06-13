@@ -153,7 +153,7 @@ function drawPlayer(x, y, label, lightColor, darkColor) {
     ctx.fillStyle = 'white';
     ctx.shadowBlur = 2;
     ctx.shadowColor = 'black';
-    ctx.fillText(label, offsetX + x - 6, offsetY + y + 12);
+    ctx.fillText(label, offsetX + x - 4, offsetY + y + 12);
     ctx.shadowBlur = 0;
 }
 
